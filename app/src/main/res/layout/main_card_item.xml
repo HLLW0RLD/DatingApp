@@ -7,6 +7,10 @@
     card_view:cardCornerRadius="10dp"
     android:layout_margin="@dimen/small_default_margin">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/image_container"
         android:layout_width="match_parent"
@@ -50,17 +54,13 @@
         android:layout_gravity="start|top"
         android:src="@drawable/ic_baseline_error_24"/>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ProgressBar
-            android:background="#00FFFFFF"
-            android:id="@+id/cardLoadingLayout"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+    <ProgressBar
+        android:background="#00FFFFFF"
+        android:id="@+id/cardLoadingLayout"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
 
     </FrameLayout>
 </androidx.cardview.widget.CardView>

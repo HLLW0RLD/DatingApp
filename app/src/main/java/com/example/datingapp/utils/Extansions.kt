@@ -36,26 +36,36 @@ fun View.hide(): View {
     return this
 }
 
-fun bind(user: User, url : String, binding: MainCardItemBinding, onIdClick: (User) -> Unit){
-    Observable
-        .just(
-            binding.apply {
-                Glide
-                    .with(root)
-                    .load(url)
-                    .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
+fun bind(user: User, url: String, binding: MainCardItemBinding, onIdClick: (User) -> Unit) {
+    binding.apply {
+        Glide
+            .with(root)
+            .load(url)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
                 ): Boolean {
                     if (user.gender == "F") {
-                        placeholderF.visibility = View.VISIBLE
+                        placeholderF.show()
                     } else if (user.gender == "M") {
-                        placeholderM.visibility = View.VISIBLE
+                        placeholderM.show()
                     }
                     return false
                 }
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
                 ): Boolean {
-                    cardLoadingLayout.visibility = View.GONE
+                    placeholderF.hide()
+                    placeholderM.hide()
+                    cardLoadingLayout.hide()
                     return false
                 }
             })
@@ -69,20 +79,20 @@ fun bind(user: User, url : String, binding: MainCardItemBinding, onIdClick: (Use
         showId.setOnClickListener {
             onIdClick(user)
         }
-    })
-        .subscribeOn(Schedulers.io())
-        .subscribe()
+    }
 }
 
-fun reBind(user: User, url : String, binding: MainCardItemBinding, onIdClick: (User) -> Unit){
-    Observable
-        .just(
-            binding.apply {
-                Glide
-                    .with(root)
-                    .load(url)
-                    .listener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
+fun reBind(user: User, url: String, binding: MainCardItemBinding, onIdClick: (User) -> Unit) {
+    binding.apply {
+        Glide
+            .with(root)
+            .load(url)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
                 ): Boolean {
                     if (user.gender == "F") {
                         placeholderF.show()
@@ -91,8 +101,16 @@ fun reBind(user: User, url : String, binding: MainCardItemBinding, onIdClick: (U
                     }
                     return false
                 }
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
                 ): Boolean {
+                    placeholderF.hide()
+                    placeholderM.hide()
                     cardLoadingLayout.hide()
                     return false
                 }
@@ -107,7 +125,4 @@ fun reBind(user: User, url : String, binding: MainCardItemBinding, onIdClick: (U
             onIdClick(user)
         }
     }
-        )
-        .subscribeOn(Schedulers.io())
-        .subscribe()
 }
