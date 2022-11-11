@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DatingApp</string>
+    <string name="title_datingapp">DatingApp</string>
+    <string name="close">close</string>
+</resources>
